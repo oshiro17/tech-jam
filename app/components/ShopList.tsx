@@ -22,12 +22,12 @@ export default function ShopList() {
     setError(null);
 
     // page の値に基づいて start を計算する (例: 1ページあたり5件)
-    const start: number = page * 100;
+    const start: number = page * 10;
     console.log("page:", page, "start:", start);
 
     try {
       // APIルートへのリクエスト
-      const response = await fetch(`/api/shops?page=${page}&count=5&start=${start}`);
+      const response = await fetch(`/api/shops?page=${page}&count=10&start=${start}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.status}`);
       }

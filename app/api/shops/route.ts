@@ -48,7 +48,7 @@ export async function GET(request: Request) {
 
     // クエリパラメータからページ番号と1ページあたりの件数を取得（デフォルトは1ページ、5件）
     const page = parseInt(searchParams.get("page") || "1", 10);
-    const count = parseInt(searchParams.get("count") || "100", 10);
+    const count = parseInt(searchParams.get("count") || "10", 10);
     const start = (page - 1) * count;
 
     const query = new URLSearchParams({

@@ -1,5 +1,9 @@
 "use client";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
+// import { ThemeToggle } from "@/components/theme-toggle";
 
 // Shop 型を定義
 interface Shop {
@@ -53,12 +57,40 @@ export default function ShopList() {
   const handleNext = () => {
     fetchShops(currentPage + 1);
   };
-
+  const [keyword, setKeyword] = useState("");
+ 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setKeyword(value);
+    // console.log(event);
+    console.log(keyword);
+  };
+ 
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log("button click", keyword);
+  };
   return (
     <div className="mx-auto max-w-3xl p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">
+          <div className="flex items-start justify-center pt-36">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      <form className="flex items-center space-x-4">
+        <Input
+          type="search"
+          placeholder="検索..."
+          onChange={handleInputChange}
+          className="max-w-sm w-full"
+        />
+        <Button type="submit" onClick={handleButtonClick} className="max-w-sm">
+          検索
+        </Button>
+      </form>
+    </div>
+      {/* <h2 className="text-2xl font-bold mb-6 text-center">
         店舗一覧 (現在のページ: {currentPage})
-      </h2>
+      </h2> */}
 
       {loading && <p className="text-blue-500">読み込み中...</p>}
       {error && <p className="text-red-500">{error}</p>}
